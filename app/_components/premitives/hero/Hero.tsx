@@ -1,8 +1,8 @@
 import React from "react";
 import "./Hero.scss";
 import Image from "next/image";
-import { Button } from "@/_components";
-import Container from "@/_components/layout/container/Container";
+import { Button, Container } from "@/_components";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -14,7 +14,9 @@ const Hero = () => {
             {" "}
             An apple mobile which is nothing like apple
           </div>
-          <Button text="View" className="hero_btn" />
+          <Link href={"/details/1"}>
+            <Button text="View" className="hero_btn" />
+          </Link>
         </div>
         <div className="image_wrap"></div>
       </div>

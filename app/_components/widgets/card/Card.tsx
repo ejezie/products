@@ -16,7 +16,7 @@ const Card = () => {
         <div className="card_text">
           61.<small>98</small> €
         </div>
-        <Link href="#" className="buy">
+        <Link href="/detail/1" className="buy">
           {" "}
           <Button text="More" className="more" />
         </Link>

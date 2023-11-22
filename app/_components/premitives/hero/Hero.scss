@@ -2,6 +2,9 @@
 
 .hero {
   padding: 40px 0px;
+  @include var.mq("lg") {
+    flex-direction: column;
+  }
   .hero_text_wrap {
     width: 40%;
     padding: 150px 0px;
@@ -16,6 +19,10 @@
     .hero_btn {
       max-width: 200px;
     }
+    @include var.mq("lg") {
+      width: 100%;
+      padding: 50px 0px;
+    }
   }
   .image_wrap {
     width: 60%;
@@ -23,5 +30,8 @@
     height: 60vh;
     width: 100%;
     border-radius: 30px;
+    @include var.mq("lg") {
+      width: 100%;
+    }
   }
 }
