@@ -1,0 +1,82 @@
+@use "@/variable" as var;
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background-color: var.$card-bg;
+  border-radius: 20px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    width: 100%;
+    height: 100%;
+    background-color: var.$card-hover-bg;
+    transform: skewY(345deg);
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover::before {
+    top: -70%;
+    transform: skewY(390deg);
+  }
+
+  &::after {
+    content: "CORSAIR";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 6em;
+    color: rgba(0, 0, 0, 0.1);
+  }
+
+  .imgBox {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1;
+
+    img {
+      height: 300px;
+      width: auto;
+      max-width: 100%;
+      transition: 0.5s ease-in-out;
+    }
+
+    &:hover img {
+      max-width: 50%;
+    }
+  }
+
+  .contentBox {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    .more {
+      position: relative;
+      top: 50px;
+      opacity: 0;
+      margin-top: 15px;
+      color: #000000;
+      text-decoration: none;
+      transition: 0.5s ease-in-out;
+      width: 200px;
+    }
+
+    &:hover .more {
+      top: 20px;
+      opacity: 1;
+    }
+  }
+}

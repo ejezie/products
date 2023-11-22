@@ -1,0 +1,27 @@
+@use "@/variable" as var;
+
+.hero {
+  padding: 40px 0px;
+  .hero_text_wrap {
+    width: 40%;
+    padding: 150px 0px;
+    .hero_text_title {
+      margin-bottom: 10px;
+    }
+    .hero_text_desc {
+      max-width: 300px;
+      width: 100%;
+      margin-bottom: 22px;
+    }
+    .hero_btn {
+      max-width: 200px;
+    }
+  }
+  .image_wrap {
+    width: 60%;
+    background-color: var.$card-hover-bg;
+    height: 60vh;
+    width: 100%;
+    border-radius: 30px;
+  }
+}

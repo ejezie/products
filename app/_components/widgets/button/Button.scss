@@ -1,0 +1,28 @@
+@use "@/variable" as var;
+
+.button {
+  padding: 9px 3px;
+  color: #000000;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 30px;
+  background: var.$card-hover-bg;
+  transition: all 0.4s linear;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  &:hover {
+    background: darken(var.$card-hover-bg, 10%);
+  }
+
+  @include var.mq("lg") {
+    font-size: 12;
+  }
+}
+
+.invalid {
+  @extend .button;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
