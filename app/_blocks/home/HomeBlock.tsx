@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import "./HomeBlock.scss";
 import { Hero, Products } from "@/_components";
 

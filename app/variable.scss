@@ -58,9 +58,8 @@ $card-text-color: white;
 
 .text {
   color: #c4cad6;
-  font-family: Satoshi;
   font-size: 16px;
-  
+
   @include mq("lg") {
     font-size: 12px;
   }
@@ -70,7 +69,7 @@ $card-text-color: white;
   @extend .text;
   font-size: 54px;
   @include mq("lg") {
-    font-size: 32px;
+    font-size: 40px;
   }
 }
 
