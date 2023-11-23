@@ -6,8 +6,8 @@
     flex-direction: column;
   }
   .hero_text_wrap {
-    width: 40%;
-    padding: 150px 0px;
+    width: 45%;
+    // padding: 150px 0px;
     .hero_text_title {
       margin-bottom: 10px;
     }
@@ -25,13 +25,16 @@
     }
   }
   .image_wrap {
-    width: 60%;
+    width: 55%;
     background-color: var.$card-hover-bg;
     height: 60vh;
-    width: 100%;
     border-radius: 30px;
+    position: relative;
+    overflow: hidden;
     @include var.mq("lg") {
       width: 100%;
+    }
+    .img {
     }
   }
 }

@@ -16,3 +16,20 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
+.tabs_wrap {
+  overflow-x: scroll;
+  gap: 15px;
+  margin-bottom: 30px;
+  .tabs {
+    white-space: nowrap;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var.$text-black;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: var.$card-hover-bg !important;
+}
