@@ -20,12 +20,12 @@ const DetailsBlock = () => {
         <div className="details between">
           <div className="image_wrap">
             <div className="image_main">
-              <img src={data?.thumbnail} alt="product" className="img" />
+              <Image fill src={data?.thumbnail} alt="product" className="img" />
             </div>
             <div className="image_wrap_item between">
               {data?.images?.map((item: string, idx: number) => (
                 <div key={idx} className="img_wrap">
-                  <img src={item} alt="product" className="img_item" />
+                  <Image fill src={item} alt="product" className="img_item" />
                 </div>
               ))}
             </div>

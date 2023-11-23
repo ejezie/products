@@ -33,3 +33,14 @@
 .active {
   background-color: var.$card-hover-bg !important;
 }
+
+.btn_wrap {
+  padding: 30px 0px;
+  .prod_pg_next {
+    max-width: 200px;
+    margin-left: 20px;
+  }
+  .prod_pg_prev {
+    max-width: 200px;
+  }
+}

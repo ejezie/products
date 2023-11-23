@@ -26,7 +26,6 @@
   }
   .image_wrap {
     width: 55%;
-    background-color: var.$card-hover-bg;
     height: 60vh;
     border-radius: 30px;
     position: relative;
@@ -35,6 +34,7 @@
       width: 100%;
     }
     .img {
+      object-fit: cover;
     }
   }
 }

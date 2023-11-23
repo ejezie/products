@@ -99,11 +99,12 @@ $card-text-color: white;
 }
 
 .card_title {
-  font-size: 18px;
+  font-size: 14px;
   color: $card-text-color;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: center;
 }
 
 .card_text {

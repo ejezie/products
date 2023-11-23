@@ -9,7 +9,7 @@ const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Get all products
     getAllProducts: builder.query({
-      query: ({ limit = 6, skip = 6 }) => ({
+      query: ({ limit = 6, skip = 0 }) => ({
         url: `${PRODUCTS}?limit=${limit}&skip=${skip}`,
         method: "GET",
       }),
