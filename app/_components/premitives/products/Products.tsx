@@ -10,6 +10,7 @@ import {
 import { useAppDispatch } from "@/hooks";
 import { openModal } from "@/_redux/slices/modal.slice";
 import formatErrorResponse from "@/utils/formatErroResponse";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Products = () => {
   const [active, setActive] = useState("All");
@@ -82,28 +83,68 @@ const Products = () => {
               </div>
             ))
           : dataCategories?.map((item: string, idx: number) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{
+                  opacity: 1,
+                  transition: {
+                    duration: 1,
+                    delay: 1.5,
+                  },
+                }}
+                viewport={{
+                  once: true,
+                }}
                 className={`tabs ${active === item && "active"}`}
                 key={idx}
                 onClick={() => setActive(item)}
               >
                 {item}
-              </div>
+              </motion.div>
             ))}
       </div>
-      <div className="products">
-        {isLoading || isLoadingCategory
-          ? [1, 1, 1, 1, 1, 1]?.map((_, idsx) => (
-              <div key={idsx}>
-                <Shimmer height="380px" margin="20px 0px 20px 0px" />
-              </div>
-            ))
-          : shownData?.products?.map((item: any, idx: number) => (
-              <div key={idx} className="product_item">
-                <Card item={item} />
-              </div>
-            ))}
-      </div>
+      <AnimatePresence>
+        <motion.div
+          key={active}
+          initial={{ x: 80 }}
+          animate={{ x: 0 }}
+          exit={{ x: 100, opacity: 0 }}
+          transition={{
+            duration: 0.3,
+            delay: 0.5,
+            // ease: "easeInOut",
+          }}
+        >
+          <div className="products">
+            {isLoading || isLoadingCategory
+              ? [1, 1, 1, 1, 1, 1]?.map((_, idsx) => (
+                  <div key={idsx}>
+                    <Shimmer height="380px" margin="20px 0px 20px 0px" />
+                  </div>
+                ))
+              : shownData?.products?.map((item: any, idx: number) => (
+                  <motion.div
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        duration: 1,
+                        delay: (0 + 1 + idx) * 0.3,
+                      },
+                    }}
+                    viewport={{
+                      once: true,
+                    }}
+                    key={idx}
+                    className="product_item"
+                  >
+                    <Card item={item} />
+                  </motion.div>
+                ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
       {active === "All" && (
         <div className="end btn_wrap">
           <Button
