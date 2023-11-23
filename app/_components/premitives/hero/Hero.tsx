@@ -6,11 +6,11 @@ import Link from "next/link";
 import { useGetSingleProductQuery } from "@/_services/product.service";
 
 const Hero = () => {
-  const [random, setRandom] = useState(30);
+  const [random, setRandom] = useState(300);
   const { data, isLoading } = useGetSingleProductQuery(random);
 
   useEffect(() => {
-    let randomNumber = Math.floor(Math.random() * 6) + 1;
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
     setRandom(randomNumber);
   }, []);
 
@@ -28,7 +28,7 @@ const Hero = () => {
           {isLoading ? (
             <Shimmer height="100px" width="95%" margin="0px 0px 20px 0px" />
           ) : (
-            <div className="hero_text_desc text"> {data?.description}</div>
+            <div className="hero_text_desc sub_heading"> {data?.description}</div>
           )}
           {isLoading ? (
             <Shimmer height="60px" width="250px" margin="0px 0px 20px 0px" />

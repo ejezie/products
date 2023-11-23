@@ -67,7 +67,8 @@ $card-text-color: white;
 
 .heading {
   @extend .text;
-  font-size: 54px;
+  font-size: 45px;
+  line-height: normal;
   @include mq("lg") {
     font-size: 40px;
   }
@@ -75,7 +76,7 @@ $card-text-color: white;
 
 .sub_heading {
   color: #143b76;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
 
   @include mq("lg") {
