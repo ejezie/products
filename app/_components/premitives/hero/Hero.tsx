@@ -1,35 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Hero.scss";
 import Image from "next/image";
-import { Button, Container } from "@/_components";
+import { Button, Container, Shimmer } from "@/_components";
 import Link from "next/link";
-import { useGetAllProductsQuery } from "@/_services/product.service";
+import { useGetSingleProductQuery } from "@/_services/product.service";
 
 const Hero = () => {
-  const { data } = useGetAllProductsQuery({});
+  const [random, setRandom] = useState(30);
+  const { data, isLoading } = useGetSingleProductQuery(random);
+
+  useEffect(() => {
+    let randomNumber = Math.floor(Math.random() * 6) + 1;
+    setRandom(randomNumber);
+  }, []);
 
   return (
     <Container>
       <div className="hero start">
         <div className="hero_text_wrap">
-          <div className="grad_text heading hero_text_title">
-            {data?.products[0]?.title}
-          </div>
-          <div className="hero_text_desc text">
-            {" "}
-            {data?.products[0]?.description}
-          </div>
-          <Link href={`/details/${data?.products[0]?.id}`}>
-            <Button text="View" className="hero_btn" />
-          </Link>
+          {isLoading ? (
+            <Shimmer height="50px" width="95%" margin="0px 0px 20px 0px" />
+          ) : (
+            <div className="grad_text heading hero_text_title">
+              {data?.title}
+            </div>
+          )}
+          {isLoading ? (
+            <Shimmer height="100px" width="95%" margin="0px 0px 20px 0px" />
+          ) : (
+            <div className="hero_text_desc text"> {data?.description}</div>
+          )}
+          {isLoading ? (
+            <Shimmer height="60px" width="250px" margin="0px 0px 20px 0px" />
+          ) : (
+            <Link href={`/details/${data?.id}`}>
+              <Button text="View" className="hero_btn" />
+            </Link>
+          )}
         </div>
+
         <div className="image_wrap">
-          <Image
-            fill
-            src={data?.products[0]?.thumbnail}
-            alt="mouse corsair"
-            className="img"
-          />
+          {isLoading ? (
+            <Shimmer height="60vh" margin="0px 0px 20px 0px" />
+          ) : (
+            <Image
+              fill
+              src={data?.thumbnail}
+              alt="mouse corsair"
+              className="img"
+            />
+          )}
         </div>
       </div>
     </Container>
