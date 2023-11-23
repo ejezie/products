@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Products.scss";
 import { Button, Card, Shimmer } from "@/_components";
 import Container from "@/_components/layout/container/Container";
@@ -7,20 +7,31 @@ import {
   useGetProductCategoriesQuery,
   useGetProductsOfCategoryQuery,
 } from "@/_services/product.service";
+import { useAppDispatch } from "@/hooks";
+import { openModal } from "@/_redux/slices/modal.slice";
+import formatErrorResponse from "@/utils/formatErroResponse";
 
 const Products = () => {
   const [active, setActive] = useState("All");
   const [skip, setSkip] = useState(0);
 
+  const dispatch = useAppDispatch();
+
+  // request to server
   const { data, isLoading, isError, error } = useGetAllProductsQuery({ skip });
   const { data: dataCategories, isLoading: isLoadingCategories } =
     useGetProductCategoriesQuery("");
-  const { data: dataCategory, isLoading: isLoadingCategory } =
-    useGetProductsOfCategoryQuery(active);
+  const {
+    data: dataCategory,
+    isLoading: isLoadingCategory,
+    isError: isErrorCategory,
+    error: errorCategory,
+  } = useGetProductsOfCategoryQuery(active);
 
+  // select data to show
   const shownData = active === "All" ? data : dataCategory;
-  console.log(shownData, "cats");
 
+  // Handle pagination
   const hamdlePage = (type: string) => {
     if (type === "next") {
       skip <= 96 && setSkip((prev) => prev + 6);
@@ -28,6 +39,25 @@ const Products = () => {
       skip >= 6 && setSkip((prev) => prev - 6);
     }
   };
+
+  // handle error
+  useEffect(() => {
+    isError &&
+      dispatch(
+        openModal({
+          title: "An Error Occured",
+          message: formatErrorResponse(error),
+        })
+      );
+    isErrorCategory &&
+      dispatch(
+        openModal({
+          title: "An Error Occured",
+          message: formatErrorResponse(errorCategory),
+        })
+      );
+  }, [isError, error, errorCategory, isErrorCategory, dispatch]);
+
   return (
     <Container>
       <div className="tabs_wrap start">
@@ -65,10 +95,7 @@ const Products = () => {
         {isLoading || isLoadingCategory
           ? [1, 1, 1, 1, 1, 1]?.map((_, idsx) => (
               <div key={idsx}>
-                <Shimmer
-                  height="380px"
-                  margin="20px 0px 20px 0px"
-                />
+                <Shimmer height="380px" margin="20px 0px 20px 0px" />
               </div>
             ))
           : shownData?.products?.map((item: any, idx: number) => (

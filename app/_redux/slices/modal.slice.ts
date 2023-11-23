@@ -8,8 +8,6 @@ interface InitialStateType {
   promptMessage: null | string;
   promptLink: null | string;
   isOpen: boolean;
-  isOpenComponent: boolean;
-  component: null | string;
 }
 
 const initialState: InitialStateType = {
@@ -19,8 +17,6 @@ const initialState: InitialStateType = {
   promptMessage: null,
   promptLink: null,
   isOpen: false,
-  isOpenComponent: false,
-  component: null,
 };
 
 const modalSlice = createSlice({
@@ -39,13 +35,6 @@ const modalSlice = createSlice({
         state.promptLink = modalObj.promptLink || null;
         state.isOpen = true;
       }
-
-      // Check if it's a component modal
-      if (modalObj.component) {
-        state.isOpenComponent = true;
-        state.component = modalObj.component;
-      }
-
     },
 
     closeModal: (state: InitialStateType) => {
@@ -62,8 +51,5 @@ const modalSlice = createSlice({
 });
 
 // Export the slice actions and reducer
-export const {
-  openModal,
-  closeModal,
-} = modalSlice.actions;
+export const { openModal, closeModal } = modalSlice.actions;
 export default modalSlice.reducer;

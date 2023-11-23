@@ -5,12 +5,28 @@ import { Button, Container, Shimmer } from "@/_components";
 import { useGetSingleProductQuery } from "@/_services/product.service";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { useAppDispatch } from "@/hooks";
+import { openModal } from "@/_redux/slices/modal.slice";
+import formatErrorResponse from "@/utils/formatErroResponse";
 
 const DetailsBlock = () => {
   const params = useParams();
   const id = params.slug[1];
 
-  const { data, isLoading } = useGetSingleProductQuery(id);
+  const dispatch = useAppDispatch();
+
+  const { data, isLoading, isError, error } = useGetSingleProductQuery(id);
+
+  // handle error
+  useEffect(() => {
+    isError &&
+      dispatch(
+        openModal({
+          title: "An Error Occured",
+          message: formatErrorResponse(error),
+        })
+      );
+  }, [isError, error, dispatch]);
 
   return (
     <Container>
